@@ -4,6 +4,7 @@
       <div class="right-actions">
         <ul>
           <li>
+						{{input value=query on-key-press=(action (mut query)) placeholder="Filter by Invoice ID" class="input-form"}}
             {{!-- <input type="text" class="input-form" placeholder="Filter"/> --}}
           </li>
           <li><a href="javascript:void(0);" onclick={{action "showPopup" "Add Invoice"}}>Add</a></li>
@@ -26,7 +27,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								{{#each invoices as |invoice|}}
+								{{#each (search query invoices properties=searchProperties) as |invoice|}}
 								<tr>
 									{{!-- <td>{{invoice.id}}</td> --}}
 									<td>{{invoice.invoiceID}}</td>

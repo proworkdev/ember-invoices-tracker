@@ -9,6 +9,9 @@ export default Controller.extend({
 	showPopupName: 'Add Invoice',
 	errorMsg: 'All fields are required',
 	validationError: false,
+	// eslint-disable-next-line ember/avoid-leaking-state-in-ember-objects
+	searchProperties: ['invoiceID'],
+	query: '',
 	actions: {
 		createInvoice() {
 			const date = this.get('dateInput');
