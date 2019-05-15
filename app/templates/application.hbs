@@ -29,6 +29,11 @@
           </div>
         </div>
       </div>
+      {{#if validationError}}
+      	<div class="alert alert-danger" role="alert">
+  				{{errorMsg}}
+				</div>
+      {{/if}}
       <div class="modal-footer">
         <a  class="btn close-btn" data-dismiss="modal">Close</a>
         <a href="javascript:void(0);" class="btn save-btn" onclick={{action "createInvoice"}}>Save changes</a>

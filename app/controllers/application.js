@@ -6,6 +6,8 @@ import Controller from '@ember/controller';
 export default Controller.extend({
 	repo: service(),
 	showPopupName: 'Add Invoice',
+	errorMsg: 'All fields are required',
+	validationError: false,
 	actions: {
 		createInvoice() {
 			const date = this.get('dateInput');
@@ -18,14 +20,17 @@ export default Controller.extend({
 						completed: false,
 						date: date,
 						amount: amount
-					});	
-				} else {					
+					});
+				} else {				
 				}
 				$("#add-edit-invoice").modal('toggle');
+			} else {
+				this.set('validationError', true);
 			}
 		},
 
 		showPopup(name, {date = '', amount = '', id = ''}) {
+			this.set('validationError', false);			
 			this.set('dateInput', date);
 			this.set('amountInput', amount);
 			this.set('IDInput', id);
