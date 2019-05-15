@@ -20,13 +20,6 @@ export default Service.extend({
 		this.persist();
 	},
 
-	updateAll(data) {
-		this.data = data;
-		console.log(this.data);
-		this.persist();		
-		return data;
-	},
-
 	persist() {
 		window.localStorage.setItem('invoices', JSON.stringify(this.data));
 	}

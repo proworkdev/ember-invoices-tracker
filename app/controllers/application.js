@@ -1,3 +1,4 @@
+import { set } from '@ember/object';
 import { isBlank } from '@ember/utils';
 import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
@@ -16,13 +17,24 @@ export default Controller.extend({
 			if(!isBlank(date) && !isBlank(amount)) {
 				if(isBlank(ID)) {
 					this.repo.add({
-						invoiceID: "INV" + Math.floor(Math.random()*90000) + 10000,
+						invoiceID: "INV" + Math.floor(Math.random() * 90000),
 						completed: false,
 						date: date,
 						amount: amount
 					});
-				} else {				
+				} else {	
+					let invoices = JSON.parse(JSON.stringify(this.model));
+					const invoiceIndex = invoices.map(function(invoice) {
+						return invoice.id;
+					}).indexOf(ID);
+					if(invoiceIndex > -1) {
+						set(this.model[invoiceIndex],'date', date);
+						set(this.model[invoiceIndex], 'amount', amount);
+						this.repo.persist();	
+					}
 				}
+
+				// eslint-disable-next-line ember/no-global-jquery
 				$("#add-edit-invoice").modal('toggle');
 			} else {
 				this.set('validationError', true);
@@ -35,7 +47,6 @@ export default Controller.extend({
 			this.set('amountInput', amount);
 			this.set('IDInput', id);
 			this.set('showPopupName', name);
-			// eslint-disable-next-line ember/no-global-jquery
 			$("#add-edit-invoice").modal('toggle');
 		}
 	}
