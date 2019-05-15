@@ -1,5 +1,38 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-<WelcomePage />
-{{!-- Feel free to remove this! --}}
+{{!-- {{outlet}} --}}
+{{invoice-list invoices=model showPopup=(action "showPopup")}}
 
-{{outlet}}
+<div class="modal fade" id="add-edit-invoice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content popup-box">
+      <div class="modal-header">
+        <div  class="modal-title" id="exampleModalLabel">{{showPopupName}}</div>
+        <a  class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </a>
+      </div>
+      <div class="modal-body">
+        {{input type="hidden" value=IDInput}}
+        <div class="input-form">
+          <div class="label">
+            Date
+          </div>
+          <div class="input-field">
+            {{input type="date" value=dateInput placeholder="Enter Date" class="form-control"}}
+          </div>
+        </div>
+        <div class="input-form">
+          <div class="label">
+            Amount
+          </div>
+          <div class="input-field">
+            {{input type="number" value=amountInput placeholder="Enter Amount" class="form-control"}}
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a  class="btn close-btn" data-dismiss="modal">Close</a>
+        <a href="javascript:void(0);" class="btn save-btn" onclick={{action "createInvoice"}}>Save changes</a>
+      </div>
+  </div>
+  </div>
+</div>

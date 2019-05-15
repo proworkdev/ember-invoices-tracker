@@ -1,0 +1,50 @@
+<div class="main-panel">
+  <div class="container">
+    <div class="top-bar">
+      <div class="right-actions">
+        <ul>
+          <li>
+            {{!-- <input type="text" class="input-form" placeholder="Filter"/> --}}
+          </li>
+          <li><a href="javascript:void(0);" onclick={{action "showPopup" "Add Invoice"}}>Add</a></li>
+        </ul>
+      </div>
+    </div>
+		{{#if invoices.length}}
+			<div class="listing-box">
+				<div class="top-heading">Invoices List</div>
+					<div class="table-list table-overflow table-shadowsoverflow">	
+						<table class="table table-nowhite-space table-shadows table-responsive">
+							<thead class="thead-dark">
+								<tr>
+									{{!-- <th>#</th> --}}
+									<th>Invoice No.</th>
+									<th>Date</th>
+									<th>Amount</th>
+									<th>Actions</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+								{{#each invoices as |invoice|}}
+								<tr>
+									{{!-- <td>{{invoice.id}}</td> --}}
+									<td>{{invoice.invoiceID}}</td>
+									<td>{{invoice.date}}</td>
+									<td>$ {{invoice.amount}}</td>
+									<td>
+										<ul>
+											<li><a onclick={{action "showPopup" "Edit Invoice" invoice}} href="javascript:void(0);" class="edit-btn"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
+											<li><a onclick={{action "removeInvoice" invoice}} href="javascript:void(0);" class="delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+										</ul>
+									</td>
+								</tr>
+									{{/each}}
+							</tbody>
+						</table>
+					</div>
+			</div>
+		{{/if}}
+  </div>
+</div>
+
