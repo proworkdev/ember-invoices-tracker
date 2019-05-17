@@ -12,7 +12,14 @@ export default Controller.extend({
 	// eslint-disable-next-line ember/avoid-leaking-state-in-ember-objects
 	searchProperties: ['invoiceID'],
 	query: '',
+	calculateSum: function() {
+		const sum = eval(this.model.map(function(invoice){
+			return invoice.amount
+		}).join("+"));
+		return sum;
+	}.property("model.@each.amount"),
 	actions: {
+		
 		createInvoice() {
 			const date = this.get('dateInput');
 			const amount = this.get('amountInput');
